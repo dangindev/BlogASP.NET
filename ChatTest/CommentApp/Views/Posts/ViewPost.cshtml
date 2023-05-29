@@ -1,0 +1,26 @@
+﻿@model CommentApp.ViewModels.PostViewModel
+
+<h2>@Model.Title</h2>
+<p>@Model.Content</p>
+
+<h3>Comments</h3>
+<ul>
+    @foreach (var comment in Model.Comments)
+    {
+            <li>
+                <h4>@comment.Author</h4>
+                <p>@comment.Content</p>
+                <p>@comment.CreatedAt</p>
+            </li>
+    }
+</ul>
+
+<!-- Form for adding a new comment -->
+<form method="post" action="@Url.Action("AddComment", "Post")">
+    <input type="hidden" name="postId" value="@Model.Id" />
+    <div>
+        <label for="commentContent">Comment:</label>
+        <textarea id="commentContent" name="commentContent" required></textarea>
+    </div>
+    <button type="submit">Add Comment</button>
+</form>
